@@ -30,13 +30,13 @@ Manually Starting... Menu TIBCO > Start EMS Administration Tool
 Admin and password should be both blank, this is a local dev machine.  production and dev integration testing should have admin setup.
 The main commands we are interested in are below.  
 
-> help
-  show topics
-  show topic topicname
-  show queues
-  show queue queuename
-  delete topic topicname
-  delete queue queuename
+> help  
+  show topics  
+  show topic topicname  
+  show queues  
+  show queue queuename  
+  delete topic topicname  
+  delete queue queuename  
 
 [More Commands](https://haritibcoblog.com/2015/05/23/tibco-ems-administration-commands-some-important-ones/)
 
@@ -112,15 +112,18 @@ Maximum message size is 512MB.
 
 ## Code
 
-#### [Tutorial 1: "Hello World!" using TextMessage and Topic]()
+#### Tutorial 1: "Hello World!" using TextMessage and Topic
 https://github.com/craignicholson/tibcoems-tutorials/tree/master/1_Receive
 https://github.com/craignicholson/tibcoems-tutorials/tree/master/1_Send
 
-#### [Tutorial 2: Push a file to the queue, and receive the bytes and write the file back out using ByteMessage and Queue]()
+#### Tutorial 2: Push a file to the queue, and receive the bytes and write the file back out using ByteMessage and Queue
 https://github.com/craignicholson/tibcoems-tutorials/tree/master/2_ReceiveByteMessage
 https://github.com/craignicholson/tibcoems-tutorials/tree/master/2_SendByteMessage
 
-#### [Tutorial 3: Sending XML using TextMessage and Topic]()
+#### Tutorial 3: Sending XML using TextMessage and Queue
+https://github.com/craignicholson/tibcoems-tutorials/tree/master/2_ReceiveTextMessage
+https://github.com/craignicholson/tibcoems-tutorials/tree/master/2_SendTextMessage
+
 
 #### [Pub Sub Example]()
 
