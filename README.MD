@@ -22,21 +22,21 @@ Here are a few commands you can run in the a cmd window while the EMS Server is 
 Manually Starting... Menu TIBCO > Start EMS Administration Tool
 
 > connect
-Login name (admin):
-Password:
-Connected to: tcp://localhost:7222
-tcp://localhost:7222>
+  Login name (admin):  
+  Password:  
+  Connected to: tcp://localhost:7222  
+  tcp://localhost:7222>  
 
 Admin and password should be both blank, this is a local dev machine.  production and dev integration testing should have admin setup.
 The main commands we are interested in are below.  
 
 > help
-> show topics
-> show topic topicname
-> show queues
-> show queue queuename
-> delete topic topicname
-> delete queue queuename
+  show topics
+  show topic topicname
+  show queues
+  show queue queuename
+  delete topic topicname
+  delete queue queuename
 
 [More Commands](https://haritibcoblog.com/2015/05/23/tibco-ems-administration-commands-some-important-ones/)
 
@@ -61,6 +61,14 @@ Reduces bandwidth...
 PERSISTENT- producer waits for client to reply with confirmation.  Writes data to disk.   Data remains until client sends ACK.
 NON_PERSISTENT - data in memory, if no client or EMS restarts data is lost.
 RELAIABLE_DELIVERY - ...
+
+#### Queues
+If a consumer is connected the message will be dispatched to it. If there are no consumers connected the message will remain saved on disk until a consumer connects, whereupon it will be dispatched.
+
+When a non-persistent message is sent to a queue, the broker saves it in memory. When a consumer connects the message is dispatched to it. If the broker is restarted before the message is sent then it will be lost forever.
+
+#### Topics
+
 
 ## Message Header
 
@@ -105,8 +113,12 @@ Maximum message size is 512MB.
 ## Code
 
 #### [Tutorial 1: "Hello World!" using TextMessage and Topic]()
+https://github.com/craignicholson/tibcoems-tutorials/tree/master/1_Receive
+https://github.com/craignicholson/tibcoems-tutorials/tree/master/1_Send
 
 #### [Tutorial 2: Push a file to the queue, and receive the bytes and write the file back out using ByteMessage and Queue]()
+https://github.com/craignicholson/tibcoems-tutorials/tree/master/2_ReceiveByteMessage
+https://github.com/craignicholson/tibcoems-tutorials/tree/master/2_SendByteMessage
 
 #### [Tutorial 3: Sending XML using TextMessage and Topic]()
 
@@ -121,4 +133,6 @@ Maximum message size is 512MB.
 #### [Examples from Tibco]()
 
 # References
-https://docs.tibco.com/pub/ems/8.3.0/doc/html/wwhelp/wwhimpl/js/html/wwhelp.htm
+https://docs.tibco.com/pub/ems/8.3.0/doc/html/wwhelp/wwhimpl/js/html/wwhelp.
+http://fahdshariff.blogspot.com/2010/08/using-compressed-jms-messages.html
+
