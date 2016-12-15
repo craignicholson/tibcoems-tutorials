@@ -78,7 +78,6 @@ class Program
                     bm.ReadBytes(data);
                     //Console.WriteLine(Encoding.UTF8.GetString(data));
                     File.WriteAllBytes(filename + ".xml", data);
-                    //http://fahdshariff.blogspot.com/2010/08/using-compressed-jms-messages.html
                 }
                 // Check to see if we need to ACK, ACK will allow the message to be removed from the queue.
                 if (ackMode == Session.CLIENT_ACKNOWLEDGE ||
