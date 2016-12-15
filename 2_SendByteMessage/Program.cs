@@ -57,6 +57,9 @@ class Program
             msg.SetStringProperty("FILE_SIZE", file.Length.ToString());
             msg.SetStringProperty("FILE_NAME", Guid.NewGuid().ToString());
 
+            //compress
+            msg.SetBooleanProperty("JMS_TIBCO_COMPRESS", true);
+
             //publish the message
             msgProducer.Send(destination, msg);
             Console.WriteLine("Published message: " + msg.ToString());
