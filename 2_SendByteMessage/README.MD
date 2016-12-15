@@ -1,5 +1,3 @@
 # 2_SendByteMessage
-Here you can find C# examples for Tibco EMS.
-
-To successfully use the examples you will need a running Tibco EMS server.
+We will create a new queue 'ExportQ' and read an xml file and send the bytes of this file to the queue.
 
