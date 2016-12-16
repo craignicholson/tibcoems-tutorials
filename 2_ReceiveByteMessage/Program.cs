@@ -30,17 +30,6 @@ class Program
 
     public void Run(string[] args)
     {
-        try
-        {
-            //tibemsUtilities.initSSLParams(serverUrl, args);
-        }
-        catch (Exception e)
-        {
-            System.Console.WriteLine("Exception: " + e.Message);
-            System.Console.WriteLine(e.StackTrace);
-            System.Environment.Exit(-1);
-        }
-
         Console.WriteLine("Server " + ((serverUrl != null) ? serverUrl : "localhost"));
         Console.WriteLine("User " + ((userName != null) ? userName : "(null)"));
         Console.WriteLine("Queue " + queueName);
