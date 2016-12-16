@@ -44,24 +44,23 @@ The main commands we are interested in are below.
 
 #### Tutorial 1: "Hello World!" using TextMessage and Topic
 In a publish and subscribe message system, producers address messages to a topic. In this model, the producer 
-is known as a publisher and the consumer is known as a subscriber.
+is known as a publisher and the consumer is known as a subscriber.  
 
 Many publishers can publish to the same topic, and a message from a single publisher can be received by many 
 subscribers. Subscribers subscribe to topics, and all messages published to the topic are received by all 
 subscribers to the topic. This type of message protocol is also known as broadcast messaging because messages 
 are sent over the network and received by all interested subscribers, similar to how radio or 
-television signals are broadcast and received.   (need to write my own description)
+television signals are broadcast and received.   (need to write my own description)  
 
-Producer (Publisher)	1_Send
-Consumer (Subscriber)	1_Receive
-
-Start the Consumer first (You can start one or more than one)
-Start the Producer - which sends the Hello World message to all subscribers.
-
-message selector...
-async message handler in 1_Receive
-[Consumer-Subscriber](https://github.com/craignicholson/tibcoems-tutorials/tree/master/1_Receive)  
+[Consumer-Subscriber](https://github.com/craignicholson/tibcoems-tutorials/tree/master/1_Receive)   
 [Producer-Publisher](https://github.com/craignicholson/tibcoems-tutorials/tree/master/1_Send)  
+
+
+Start the Consumer first (You can start one or more than one)  
+Start the Producer - which sends the Hello World message to all subscribers.  
+
+explain the message selector...  
+explain the async message handler in 1_Receive  
 
 #### Tutorial 2: Push a file to the queue, and receive the bytes and write the file back out using ByteMessage and Queue
 Point-to-point messaging has one producer and one consumer per message. 
@@ -69,15 +68,19 @@ This style of messaging uses a queue to store messages until they are received.
 The message producer sends the message to the queue; the message consumer retrieves 
 messages from the queue and sends acknowledgement that the message was received.
 
-You can run 2_SendByteMessage before you run 2_ReviceByteMessage
-You can run 2_ReceiveByteMessagae before you run 2_SendByteMessage
+[Consumer](https://github.com/craignicholson/tibcoems-tutorials/tree/master/2_ReceiveByteMessage)  
+[Producer](https://github.com/craignicholson/tibcoems-tutorials/tree/master/2_SendByteMessage)  
 
-The Queue will persist the message until you remove the messages off of the queue.
 
-Only one recevier works for this example.
+You can run 2_SendByteMessage before you run 2_ReviceByteMessage  
+You can run 2_ReceiveByteMessagae before you run 2_SendByteMessage  
 
-[Consumer](https://github.com/craignicholson/tibcoems-tutorials/tree/master/2_ReceiveByteMessage) 
-[Producer](https://github.com/craignicholson/tibcoems-tutorials/tree/master/2_SendByteMessage)
+The Queue will persist the message until you remove the messages off of the queue.  
+
+Only one recevier works for this example.   Multiple receivers will not recieve the message.  
+
+I wonder is I send 100000's of requests if multiple receivers will pull other messages off the queue?   
+
 
 #### Tutorial 3: Sending XML using TextMessage and Queue
 Point-to-Point Use Case
@@ -85,7 +88,7 @@ Point-to-Point Use Case
 Applications are processing information and when the information is ready the data is posted to the queue.
 The Consumer receives the data and loads it into a database.
 
-[Consumer](https://github.com/craignicholson/tibcoems-tutorials/tree/master/2_ReceiveTextMessage)  
+[Consumer](https://github.com/craignicholson/tibcoems-tutorials/tree/master/2_ReceiveTextMessage)   
 [Producer](https://github.com/craignicholson/tibcoems-tutorials/tree/master/2_SendTextMessage)  
 
 #### Asynchrounous Message Consumer
