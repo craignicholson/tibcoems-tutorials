@@ -11,15 +11,22 @@ To successfully use the examples you will need a running Tibco EMS server.
 * Tibco EMS Server running
 
 ## Tibco EMS Install - Windows
-Use the installer and accept all the default settings
-Manually Starting... Menu TIBCO > Start EMS Server
-This will open a windows command prompt and the server will be running...
+Use the installer and accept all the default settings (TIB_ems-dev_8.3.0_win_x86_64_vc10.zip)  
 
-You can skip setting the EMS Server as a windows sevice and just start it manually for local development.
+Start the EMS Server from Windows Menu  
+* TIBCO > Start EMS Server  
+
+This will open a windows command prompt and the server will be running.  
+
+You can skip setting the EMS Server as a windows sevice and just start it manually for local development or running these samples.  
 
 ### Tibco EMS Commands
-Here are a few commands you can run in the a cmd window while the EMS Server is running.
-Manually Starting... Menu TIBCO > Start EMS Administration Tool
+Here are a few commands you can run in the a cmd window while the EMS Server is running.  
+
+Start the EMS Administration Tool from Windows Menu  
+* TIBCO > Start EMS Administration Tool   
+
+After starting you will need to connect to the running EMS Server.  The admin and passwords will be blank, just hit the enter key.   
 
 > connect
   Login name (admin):  
@@ -27,8 +34,8 @@ Manually Starting... Menu TIBCO > Start EMS Administration Tool
   Connected to: tcp://localhost:7222  
   tcp://localhost:7222>  
 
-Admin and password should be both blank, this is a local dev machine.  production and dev integration testing should have admin setup.
-The main commands we are interested in are below.  
+The main commands we are interested in are below.  While you run these examples you can use 'show topics and 'show queues' to
+see the messages are added on the topic or queue.  
 
 > help  
   show topics  
@@ -38,9 +45,9 @@ The main commands we are interested in are below.
   delete topic topicname  
   delete queue queuename  
 
-[More Commands](https://haritibcoblog.com/2015/05/23/tibco-ems-administration-commands-some-important-ones/)
+[Additional Commands](https://haritibcoblog.com/2015/05/23/tibco-ems-administration-commands-some-important-ones/)
 
-## Code
+## Code Samples
 
 #### Tutorial 1: "Hello World!" using TextMessage and Topic
 In a publish and subscribe message system, producers address messages to a topic. In this model, the producer 
