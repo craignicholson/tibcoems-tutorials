@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections;
 using System.IO;
 using System.Threading;
 using TIBCO.EMS;
-
 class Program
 {
-
     /// <summary>
     /// Point-to-point messaging has one producer and one consumer per message. 
     /// This style of messaging uses a queue to store messages until they are received. 
     /// The message producer sends the message to the queue; the message consumer retrieves 
-    /// messages from the queue and sends acknowledgement that the message was received.
-    /// 
+    /// messages from the queue and sends acknowledgement that the message was received. 
     /// </summary>
     string serverUrl = "localhost";
     string userName = null;
@@ -41,7 +37,6 @@ class Program
             Session session = connection.CreateSession(false, Session.AUTO_ACKNOWLEDGE);
             TIBCO.EMS.Queue queue = session.CreateQueue(queueName);
             MessageProducer producer = session.CreateProducer(queue);
-            //Message message = null;
 
             // Start the Connection
             // Don't I need a connection.Close some where?
@@ -50,7 +45,6 @@ class Program
             MessageConsumer consumer = session.CreateConsumer(queue);
             Console.WriteLine("Waiting for messsages in queue " + queueName);
             consumer.MessageHandler += new EMSMessageHandler(event_MessageHandler);
-   
         }
         catch (EMSException e)
         {
@@ -92,6 +86,8 @@ class Program
             }
         }
 
+        // Acknowledge we received the message.  If the message did not get written to disk
+        // we want to not acknowledge the message was received.
         if (ackMode == Session.CLIENT_ACKNOWLEDGE ||
             ackMode == Session.EXPLICIT_CLIENT_ACKNOWLEDGE ||
             ackMode == Session.EXPLICIT_CLIENT_DUPS_OK_ACKNOWLEDGE)
