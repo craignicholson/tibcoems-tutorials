@@ -6,7 +6,12 @@ using TIBCO.EMS;
 
 class Program
 {
-
+    /// <summary>
+    /// Point-to-point messaging has one msgProducer and one consumer per message. 
+    /// This style of messaging uses a queue to store messages until they are received. 
+    /// The message msgProducer sends the message to the queue; the message consumer retrieves 
+    /// messages from the queue and sends acknowledgement that the message was received. 
+    /// </summary>
     string serverUrl = "localhost";
     string userName = null;
     string password = null;
@@ -15,8 +20,9 @@ class Program
 
     public static void Main(string[] args)
     {
+        Console.WriteLine("2_ReceiveTextMessage Point-to-Point Consumer started");
         new Program().Run(args);
-        Console.WriteLine(" Press [enter] to exit.");
+        //Console.WriteLine(" Press [enter] to exit.");
         Console.ReadLine();
     }
 
@@ -24,69 +30,24 @@ class Program
     {
         try
         {
-            //tibemsUtilities.initSSLParams(serverUrl, args);
-        }
-        catch (Exception e)
-        {
-            System.Console.WriteLine("Exception: " + e.Message);
-            System.Console.WriteLine(e.StackTrace);
-            System.Environment.Exit(-1);
-        }
+            Console.WriteLine("Server " + ((serverUrl != null) ? serverUrl : "localhost"));
+            Console.WriteLine("User " + ((userName != null) ? userName : "(null)"));
+            Console.WriteLine("Queue " + queueName);
 
-        Console.WriteLine("\n------------------------------------------------------------------------");
-        Console.WriteLine("3_ReceiverTextMessage");
-        Console.WriteLine("------------------------------------------------------------------------");
-        Console.WriteLine("Server....................... " + ((serverUrl != null) ? serverUrl : "localhost"));
-        Console.WriteLine("User......................... " + ((userName != null) ? userName : "(null)"));
-        Console.WriteLine("Queue........................ " + queueName);
-        Console.WriteLine("------------------------------------------------------------------------\n");
-
-        try
-        {
             ConnectionFactory factory = new TIBCO.EMS.ConnectionFactory(serverUrl);
-
             Connection connection = factory.CreateConnection(userName, password);
             Session session = connection.CreateSession(false, Session.AUTO_ACKNOWLEDGE);
-            TIBCO.EMS.Queue queue = session.CreateQueue(queueName);
-            MessageProducer producer = session.CreateProducer(queue);
-            Message message = null;
 
+            Destination queue = session.CreateQueue(queueName);
+            MessageProducer msgProducer = session.CreateProducer(queue);
+
+            // Start the Connection
+            // Don't I need a connection.Close some where?
             connection.Start();
 
             MessageConsumer consumer = session.CreateConsumer(queue);
-            Console.WriteLine("Polling the queue " + queueName);
-
-            // read queue until empty
-            // read messages
-            while (true)
-            {
-                // receive the message
-                message = consumer.Receive();
-                if (message == null)
-                    break;
-
-                Console.WriteLine("Received message: " + message);
-                // write text to file or consume the xml into object and dump into a database.
-                //if (message is BytesMessage)
-                //{
-                //    Console.WriteLine("MessageType : " + message.GetType());
-                //    //Message msg = args.Message;
-                //    var filename = message.GetStringProperty("FILE_NAME");
-                //    var filesize = message.GetStringProperty("FILE_SIZE");
-                //    byte[] data = null;
-                //    BytesMessage bm = (BytesMessage)message;
-                //    data = new byte[(int)bm.BodyLength]; // I could sub in FILE_SIZE here.
-                //    bm.ReadBytes(data);
-                //    //Console.WriteLine(Encoding.UTF8.GetString(data));
-                //    File.WriteAllBytes(filename + ".xml", data);
-                //}
-                // Check to see if we need to ACK, ACK will allow the message to be removed from the queue.
-                if (ackMode == Session.CLIENT_ACKNOWLEDGE ||
-                    ackMode == Session.EXPLICIT_CLIENT_ACKNOWLEDGE ||
-                    ackMode == Session.EXPLICIT_CLIENT_DUPS_OK_ACKNOWLEDGE)
-                    message.Acknowledge();
-            }
-            connection.Close();
+            Console.WriteLine("Waiting for messsages in queue " + queueName);
+            consumer.MessageHandler += new EMSMessageHandler(event_MessageHandler);
         }
         catch (EMSException e)
         {
@@ -100,5 +61,22 @@ class Program
             Console.Error.WriteLine(e.StackTrace);
             Environment.Exit(0);
         }
+    }
+
+    /// <summary>
+    /// event_MessageHandler
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="args"></param>
+    void event_MessageHandler(object sender, EMSMessageEventArgs args)
+    {
+        Console.WriteLine("Received message: " + args.Message);
+
+        // Acknowledge we received the message.  If the message did not get written to disk
+        // we want to not acknowledge the message was received.
+        if (ackMode == Session.CLIENT_ACKNOWLEDGE ||
+            ackMode == Session.EXPLICIT_CLIENT_ACKNOWLEDGE ||
+            ackMode == Session.EXPLICIT_CLIENT_DUPS_OK_ACKNOWLEDGE)
+            args.Message.Acknowledge();
     }
 }

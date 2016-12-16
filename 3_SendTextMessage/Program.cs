@@ -2,30 +2,17 @@
 using System.IO;
 using TIBCO.EMS;
 
-
 class Program
 {
-    string serverUrl = null;
-    string userName = null;
-    string password = null;
-    string name = "EventQ";
-    string clientID = null;
-    string durableName = "subscriber";
-
-    bool useTopic = true;
-    bool useAsync = false;
-
+    string queueName = "EventQ";
     Connection connection = null;
     Session session = null;
     MessageProducer msgProducer = null;
-    Destination destination = null;
-
-    //EMSCompletionListener completionListener = null;
-
+    Destination queue = null;
 
     static void Main(string[] args)
     {
-        Console.WriteLine("SendByteMessage Server (Sender/Publisher) started - BYTE MESSAGE");
+        Console.WriteLine("SendTextMessage Server");
         new Program().Run();
         Console.WriteLine(" Press [enter] to exit.");
         Console.ReadLine();
@@ -36,14 +23,14 @@ class Program
         try
         {
             TextMessage msg;
-            Console.WriteLine("Publishing to destination '" + name + "'\n");
+            Console.WriteLine("Publishing to destination queue '" + queueName + "'\n");
 
             ConnectionFactory factory = new TIBCO.EMS.ConnectionFactory("localhost");
             connection = factory.CreateConnection("", "");
 
             // create the session
             session = connection.CreateSession(false, Session.AUTO_ACKNOWLEDGE);
-            destination = session.CreateQueue(name);
+            queue = session.CreateQueue(queueName);
 
             //create the producer
             msgProducer = session.CreateProducer(null);
@@ -60,13 +47,15 @@ class Program
 
             //Add special properties
             msg.SetStringProperty("NUMBER_OF_EVENTS", 1.ToString());
+            
+            // load the txt or xml in our use case
             msg.Text = xml;
 
             //compress
             msg.SetBooleanProperty("JMS_TIBCO_COMPRESS", true);
 
             //publish the message
-            msgProducer.Send(destination, msg);
+            msgProducer.Send(queue, msg);
             Console.WriteLine("Published message: " + msg.ToString());
         }
         catch (EMSException e)
