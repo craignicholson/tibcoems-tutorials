@@ -47,7 +47,7 @@ see the messages are added on the topic or queue.
 
 ## Code Samples
 
-#### Tutorial 1: "Hello World"
+#### Tutorial 0: "Hello World"
 
 - [0_ReceiveHelloWorld](https://github.com/craignicholson/tibcoems-tutorials/tree/master/0_ReceiveHelloWorld)  
 - [0_SendHelloWorld](https://github.com/craignicholson/tibcoems-tutorials/tree/master/0_SendHelloWorld)  
