@@ -55,6 +55,22 @@ see the messages are added on the topic or queue.
 You can either start ReceiveHelloWorld first or SendHelloWorld.  This example uses a Point-to-Point queue
 where the producers messages are saved in the queue until a consumer removes the item and acknowledges receipt.
 
+##### Putting It All Together
+Run the executable
+
+> $ 1_Receive.exe
+
+then, run the sender:
+
+> $ 1_Send.exe
+
+The receiver will print the message it gets from the sender via Tibco EMS. 
+The receiver will keep running, waiting for messages (Use Ctrl-C to stop it), so try running the sender from another terminal.
+
+If you want to check on the queue, try using EMS Administrator Server show topics.
+
+Hello World!
+
 #### Tutorial 1: Publish/Subscribe
 
 - [1_Receive](https://github.com/craignicholson/tibcoems-tutorials/tree/master/1_Receive)  
@@ -90,7 +106,7 @@ This example uses an xml file which is then written to the queue as a byte array
 This use case is an example of one way to send detailed messages to Workers or even using Publisher and Subscibers.
 Another use case is if we are receiving soap messages which we need to re-publish to many subscribers.
 
-#### [Tutorial 4: Work Queues]()
+#### Tutorial 4: Work Queues
 
 - [4_Worker](https://github.com/craignicholson/tibcoems-tutorials/tree/master/4_Worker)  
 - [4_Tasks](https://github.com/craignicholson/tibcoems-tutorials/tree/master/4_Tasks)  
@@ -103,112 +119,35 @@ Start one or more Workers (Consumers) and then start the Tasks (Producer).   The
 
 You can also add more Workers while the Tasks and other Workers are already running.
 
-#### [Tutorial 4: Routing]()
+#### Tutorial 5: Routing
 IS this doable with TIBCO?
 - 4_ReceiveLogsDirect
 - 4_EmitLogDirect
 
-#### [Tutorial 5: Topics]()
+#### Tutorial 6: Topics
 
 - 5_ReceiveLogsTopic
 - 5_EmitLogTopic
 
-#### [Tutorial 6: RPC]()
+#### Tutorial 7: RPC
 
 - 6_RPCServer
 - 6_RPCClient
 
+#### Tutorial 7:# Asynchrounous Message Consumer
 
-#### Tutorial 1: "Hello World!" using TextMessage and Topic (Publish Subscribe)
+#### Tutorial 8: QueueBrowser
 
-- [Consumer-Subscriber](https://github.com/craignicholson/tibcoems-tutorials/tree/master/1_Receive)   
-- [Producer-Publisher](https://github.com/craignicholson/tibcoems-tutorials/tree/master/1_Send)  
+#### Tutorial 9:MultiCast Example
 
-
-TODO: Make a point-to-point hello world... first using a queue and save this for Pub-Sub.
-
-In a publish and subscribe message system, producers address messages to a topic. In this model, the producer 
-is known as a publisher and the consumer is known as a subscriber.  
-
-Many publishers can publish to the same topic, and a message from a single publisher can be received by many 
-subscribers. Subscribers subscribe to topics, and all messages published to the topic are received by all 
-subscribers to the topic. This type of message protocol is also known as broadcast messaging because messages 
-are sent over the network and received by all interested subscribers, similar to how radio or 
-television signals are broadcast and received.   (need to write my own description)  
-
-
-
-Start the Consumer first (You can start one or more than one)  
-Start the Producer - which sends the Hello World message to all subscribers.  
-
-
-##### Putting It All Together
-We're using the command line (cmd.exe and csc) to compile and run the code. Alternatively you could use Visual Studio.
-
-Run the executable
-
-> $ 1_Receive.exe
-
-then, run the sender:
-
-> $ 1_Send.exe
-
-The receiver will print the message it gets from the sender via Tibco EMS. 
-The receiver will keep running, waiting for messages (Use Ctrl-C to stop it), so try running the sender from another terminal.
-
-If you want to check on the queue, try using EMS Administrator Server show topics.
-
-Hello World!
-
-
-#### Tutorial 2: Push a file to the queue, and receive the bytes and write the file back out using ByteMessage and Queue
-Point-to-point messaging has one producer and one consumer per message. 
-This style of messaging uses a queue to store messages until they are received. 
-The message producer sends the message to the queue; the message consumer retrieves 
-messages from the queue and sends acknowledgement that the message was received.
-
-- [Consumer](https://github.com/craignicholson/tibcoems-tutorials/tree/master/2_ReceiveByteMessage)  
-- [Producer](https://github.com/craignicholson/tibcoems-tutorials/tree/master/2_SendByteMessage)  
-
-
-You can run 2_SendByteMessage before you run 2_ReviceByteMessage  
-You can run 2_ReceiveByteMessagae before you run 2_SendByteMessage  
-
-The Queue will persist the message until you remove the messages off of the queue.  
-
-Only one recevier works for this example.   Multiple receivers will not recieve the message.  
-
-I wonder is I send 100000's of requests if multiple receivers will pull other messages off the queue?   
-
-
-#### Tutorial 3: Sending XML using TextMessage and Queue
-Point-to-Point Use Case
-
-Applications are processing information and when the information is ready the data is posted to the queue.
-The Consumer receives the data and loads it into a database.
-
-[Consumer](https://github.com/craignicholson/tibcoems-tutorials/tree/master/2_ReceiveTextMessage)   
-[Producer](https://github.com/craignicholson/tibcoems-tutorials/tree/master/2_SendTextMessage)  
-
-#### Asynchrounous Message Consumer
-
-#### QueueBrowser
-
-#### Pub Sub Example
-
-#### MultiCast Example
-
-#### Durable Subscriber
+#### Tutorial 10: Durable Subscriber
 Durable Subscribers for Topics
 By default, subscribers only receive messages when they are active. If messages arrive on the topic when the subscriber is not available, the subscriber does not receive those messages.
 The EMS APIs allow you to create durable subscribers to ensure that messages are received, even if the message consumer is not currently running. Messages for durable subscriptions are stored on the server as long as durable subscribers exist for the topic, or until the message expiration time for the message has been reached, or until the storage limit has been reached for the topic. Durable subscribers can receive messages from a durable subscription even if the subscriber was not available when the message was originally delivered.
 When an application restarts and recreates a durable subscriber with the same ID, all messages stored on the server for that topic are delivered to the durable subscriber.
 See Creating a Message Consumer for details on how to create durable subscribers.
 
-
-#### SSL Example
-
-#### Examples from Tibco
+#### Tutorial 11 SSL Example
 
 ## Message Models
 
@@ -228,9 +167,13 @@ Like EMS sends signal to each client's EMD Multicast Daemon, and the client pull
 Reduces bandwidth...
 
 ## Message Delivery Modes
-PERSISTENT- producer waits for client to reply with confirmation.  Writes data to disk.   Data remains until client sends ACK.
-NON_PERSISTENT - data in memory, if no client or EMS restarts data is lost.
-RELAIABLE_DELIVERY - ...
+- PERSISTENT
+Producer waits for client to reply with confirmation.  Writes data to disk.   Data remains until client sends ACK.
+
+- NON_PERSISTENT
+Data in memory, if no client or EMS restarts data is lost.
+
+- RELAIABLE_DELIVERY - ...
 
 #### Queues
 If a consumer is connected the message will be dispatched to it. If there are no consumers connected the message will remain saved on disk until a consumer connects, whereupon it will be dispatched.
@@ -239,11 +182,9 @@ When a non-persistent message is sent to a queue, the broker saves it in memory.
 
 #### Topics
 
-
 ## Message Header
 
 ```
-
 Published message: 
 BytesMessage=
     { 
@@ -279,7 +220,6 @@ The examples will use TextMessage and BytesMessage because these are the two typ
 * ObjectMessage
 
 Maximum message size is 512MB.
-
 
 # References
 https://docs.tibco.com/pub/ems/8.3.0/doc/html/wwhelp/wwhimpl/js/html/wwhelp.
