@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using TIBCO.EMS;
 
 class Program
