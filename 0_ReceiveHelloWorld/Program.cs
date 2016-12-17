@@ -20,7 +20,6 @@ class Program
     {
         Console.WriteLine("ReceiveHelloWorld Consumer started");
         new Program().Run(args);
-        //Console.WriteLine(" Press [enter] to exit.");
         Console.ReadLine();
     }
 
@@ -34,7 +33,7 @@ class Program
 
             ConnectionFactory factory = new TIBCO.EMS.ConnectionFactory(serverUrl);
             Connection connection = factory.CreateConnection(userName, password);
-            Session session = connection.CreateSession(false, Session.AUTO_ACKNOWLEDGE);
+            Session session = connection.CreateSession(false, Session.AUTO_ACKNOWLEDGE); //read up more on AUTO_ACK
             Destination queue = session.CreateQueue(queueName);
             MessageConsumer consumer = session.CreateConsumer(queue);
 
