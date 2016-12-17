@@ -12,7 +12,7 @@ class Program
 
     static void Main(string[] args)
     {
-        Console.WriteLine("SendTextMessage Server");
+        Console.WriteLine("3_SendTextMessage Server");
         new Program().Run();
         Console.WriteLine(" Press [enter] to exit.");
         Console.ReadLine();
@@ -60,7 +60,7 @@ class Program
         }
         catch (EMSException e)
         {
-            Console.Error.WriteLine("Exception in csMsgProducer: " + e.Message);
+            Console.Error.WriteLine("Exception in 3_SendTextMessage: " + e.Message);
             Console.Error.WriteLine(e.StackTrace);
             Environment.Exit(-1);
         }
