@@ -56,6 +56,6 @@ class Program
         textMessage.Text = message;
         textMessage.SetStringProperty(propertyName, propertyValue);
         emsServerPublisher.Publish(textMessage);
-        Console.WriteLine("EMS Publisher published message: " + message);
+        Console.WriteLine("1_Send published message: " + message);
     }
 }
