@@ -26,11 +26,11 @@ Start the EMS Administration Tool from Windows Menu
 After starting you will need to connect to the running EMS Server.  The admin and passwords will be blank, just hit the enter key.   
 Here are a few commands you can run in the a cmd window while the EMS Server is running.   
 
-> connect
-  Login name (admin):  
-  Password:  
-  Connected to: tcp://localhost:7222  
-  tcp://localhost:7222>  
+> connect  
+  Login name (admin):    
+  Password:    
+  Connected to: tcp://localhost:7222    
+  tcp://localhost:7222>    
 
 The main commands we are interested in are below.  While you run these examples you can use 'show topics and 'show queues' to
 see the messages are added on the topic or queue.  
@@ -53,7 +53,7 @@ see the messages are added on the topic or queue.
 - [0_SendHelloWorld](https://github.com/craignicholson/tibcoems-tutorials/tree/master/0_SendHelloWorld)  
 
 You can either start ReceiveHelloWorld first or SendHelloWorld.  This example uses a Point-to-Point queue
-where the producers messages are saved in the queue until a consumer removes the item and acknowledges receipt.
+where the producers messages are saved in the queue until a consumer removes the messages and acknowledges receipt.
 
 ##### Putting It All Together
 Run the executable
@@ -64,19 +64,16 @@ then, run the sender:
 
 > $ 1_Send.exe
 
-The receiver will print the message it gets from the sender via Tibco EMS. 
-The receiver will keep running, waiting for messages (Use Ctrl-C to stop it), so try running the sender from another terminal.
+The receiver will print the message it received from the Tibco EMS. 
 
-If you want to check on the queue, try using EMS Administrator Server show topics.
-
-Hello World!
+If you want to review the message on the queue, try using EMS Administrator Server show queues.
 
 #### Tutorial 1: Publish/Subscribe
 
 - [1_Receive](https://github.com/craignicholson/tibcoems-tutorials/tree/master/1_Receive)  
 - [1_Send](https://github.com/craignicholson/tibcoems-tutorials/tree/master/1_Send)  
 
-Start two or more instances of Receiver subscriber (consumer) and then start the Send publilsher (producer).  
+Start two or more instances of Receiver (subscriber/consumer) and then start the Send publilsher (producer).  
 
 A Hello World message will be published to all subscribes which are online.  If a subscriber is offline
 it will not receive the message.  To have an offline subscriber still receive the message we will need
@@ -92,11 +89,13 @@ Either ReceiveByteMessage or SendByteMessage can be started.  The example uses a
 which allows for one message per consumer.
 
 This use case is an example of where data needs to be exported out of a system and delivered to another 
-vendor.  Instead of writing a file to disk, pushing the file to and ftp site, giving the ftp credentials
+vendor.  Instead of writing a file to disk, pushing the file to a ftp site, giving the ftp credentials
 to the vendor, and the vendor pulling off the files as they are published, we just write a byte message
-to a queue and the consumer receives the messages from the queue.
+to a queue and the consumer receives the messages from the queue.  
 
-This example uses an xml file which is then written to the queue as a byte array.
+This example uses an xml file which is then written to the queue as a byte array.  We read the bytes from
+the file and write the bytes to a ByteMessage.  The Consumer then receives the message and reads the bytes
+and writes the data back to disk as an xml file.
 
 #### Tutorial 3: Send XML as TextMessage
 
@@ -117,7 +116,7 @@ consumers as the work load increases.
 Start one or more Workers (Consumers) and then start the Tasks (Producer).   The Tasks app will generate
 1000 numbers and each Worker will read one message and perform prime factorization on the number.
 
-You can also add more Workers while the Tasks and other Workers are already running.
+You can also add more Workers while the Tasks and other Workers are already running to help process messages.
 
 #### Tutorial 5: Routing
 IS this doable with TIBCO?
