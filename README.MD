@@ -4,6 +4,7 @@ Here you can find C# examples for Tibco EMS.
 To successfully use the examples you will need a running Tibco EMS server.
 
 ## Requirements
+This is a work in progress as I learn Tibco EMS.
 
 ### Requirements for Windows
 * dotnet 4.5 VS2015
@@ -77,8 +78,42 @@ Start two or more instances of Receiver (subscriber/consumer) and then start the
 
 A Hello World message will be published to all subscribes which are online.  If a subscriber is offline
 it will not receive the message.  To have an offline subscriber still receive the message we will need
-to create a durable subscriber.  See Tutorial X.
+to create a durable subscriber. 
 
+- [1_ReceiveDurable](https://github.com/craignicholson/tibcoems-tutorials/tree/master/1_ReceiveDurable)
+
+Once the 1_ReceiveDurable has ran once and created a durable to the topic if this client closes and messages
+are delivered to the topic, once the client is restarted it will receive the messages.
+
+> tcp://localhost:7222> show topic GeneralTopic
+
+```
+ 
+ Topic:                 GeneralTopic
+ Type:                  dynamic
+ Properties:            *prefetch=64,*store=$sys.nonfailsafe
+ JNDI Names:            <none>
+ Bridges:               <none>
+ Subscriptions:         1
+ Durable Subscriptions: 1
+ Consumers:             0
+ Durable Consumers:     0
+ Pending Msgs:          0, (0 persistent)
+ Pending Msgs Size:     0.0 Kb, (0.0 Kb persistent)
+ Total Inbound Msgs:    6
+ Total Inbound Bytes:   0.8 Kb
+ Total Outbound Msgs:   11
+ Total Outbound Bytes:  1.5 Kb
+
+ ```
+
+> tcp://localhost:7222> show durables
+
+```
+  Topic Name    Durable                                Shared  User         Msgs    Size
+  GeneralTopic  Craig.Nicholson:helloworld.subscriber  N       <offline>       0     0.0 Kb
+
+```
 
 #### Tutorial 2: Send Files to a Queue
 
