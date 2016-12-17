@@ -12,7 +12,7 @@ class Program
 
     static void Main(string[] args)
     {
-        Console.WriteLine("SendByteMessage Server");
+        Console.WriteLine("2_SendByteMessage Server");
         new Program().Run();
         Console.WriteLine(" Press [enter] to exit.");
         Console.ReadLine();
@@ -23,7 +23,7 @@ class Program
         try
         {
             BytesMessage msg;
-            Console.WriteLine("Publishing to destination queue '" + queueName + "'\n");
+            Console.WriteLine("Publishing to queue '" + queueName + "'\n");
 
             ConnectionFactory factory = new ConnectionFactory("localhost");
             connection = factory.CreateConnection("", "");
@@ -40,11 +40,11 @@ class Program
             msg.WriteBytes(file);
             msg.MsgType = "Byte";
 
-            //Add special properties
+            //Add additional properties - which function as key value pairs
             msg.SetStringProperty("FILE_SIZE", file.Length.ToString());
             msg.SetStringProperty("FILE_NAME", Guid.NewGuid().ToString());
 
-            //compress
+            //compress the data
             msg.SetBooleanProperty("JMS_TIBCO_COMPRESS", true);
 
             //publish the message
@@ -53,7 +53,7 @@ class Program
         }
         catch (EMSException e)
         {
-            Console.Error.WriteLine("Exception in csMsgProducer: " + e.Message);
+            Console.Error.WriteLine("Exception in 2_SendByteMessage: " + e.Message);
             Console.Error.WriteLine(e.StackTrace);
             Environment.Exit(-1);
         }
