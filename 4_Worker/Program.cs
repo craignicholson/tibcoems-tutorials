@@ -18,7 +18,7 @@ class Program
 
     public static void Main(string[] args)
     {
-        Console.WriteLine("Worker Point-to-Point Consumer started");
+        Console.WriteLine("4_Worker Point-to-Point Consumer started");
         new Program().Run(args);
         //Console.WriteLine(" Press [enter] to exit.");
         Console.ReadLine();
@@ -35,27 +35,25 @@ class Program
             ConnectionFactory factory = new TIBCO.EMS.ConnectionFactory(serverUrl);
             Connection connection = factory.CreateConnection(userName, password);
             Session session = connection.CreateSession(false, Session.AUTO_ACKNOWLEDGE);
-
             Destination queue = session.CreateQueue(queueName);
-            MessageProducer msgProducer = session.CreateProducer(queue);
+            MessageConsumer consumer = session.CreateConsumer(queue);
 
             // Start the Connection
             // Don't I need a connection.Close some where?
             connection.Start();
 
-            MessageConsumer consumer = session.CreateConsumer(queue);
             Console.WriteLine("Waiting for messsages in queue " + queueName);
             consumer.MessageHandler += new EMSMessageHandler(event_MessageHandler);
         }
         catch (EMSException e)
         {
-            Console.Error.WriteLine("Exception in Worker: " + e.Message);
+            Console.Error.WriteLine("Exception in 4_Worker: " + e.Message);
             Console.Error.WriteLine(e.StackTrace);
             Environment.Exit(0);
         }
         catch (ThreadInterruptedException e)
         {
-            Console.Error.WriteLine("Exception in Worker: " + e.Message);
+            Console.Error.WriteLine("Exception in 4_Worker: " + e.Message);
             Console.Error.WriteLine(e.StackTrace);
             Environment.Exit(0);
         }
