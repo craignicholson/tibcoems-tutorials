@@ -22,8 +22,6 @@ class Program
         CreateClientTopicSubscriber("Owner LIKE '%HelloWorld%'"); // Pass "" for no message selector
     }
 
-    #region EMS Client
-
     /// <summary>
     /// CreateClientTopicSubscriber
     /// </summary>
@@ -33,7 +31,7 @@ class Program
         var topicname = "GeneralTopic";
         Console.WriteLine("Createing a topic we can publish to: " + topicname);
 
-        TopicConnectionFactory factory = new TIBCO.EMS.TopicConnectionFactory("localhost");
+        TopicConnectionFactory factory = new TopicConnectionFactory("localhost");
         subscriberConnection = factory.CreateTopicConnection("", "");  // Username, password
         subscriberConnection.Start();
 
@@ -52,7 +50,6 @@ class Program
     void event_MessageHandler(object sender, EMSMessageEventArgs args)
     {
         Console.WriteLine(args.Message.GetType());
-        Console.WriteLine("\nEMS Consumer received message: \n" + args.Message.ToString());
+        Console.WriteLine("\n1_Receive received message: \n" + args.Message.ToString());
     }
-    #endregion
 }
