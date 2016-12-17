@@ -137,7 +137,7 @@ IS this doable with TIBCO?
 
 #### Tutorial 8: QueueBrowser
 
-#### Tutorial 9:MultiCast Example
+#### Tutorial 9: MultiCast Example
 
 #### Tutorial 10: Durable Subscriber
 Durable Subscribers for Topics
