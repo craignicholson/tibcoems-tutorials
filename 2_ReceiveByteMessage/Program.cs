@@ -35,12 +35,7 @@ class Program
             ConnectionFactory factory = new ConnectionFactory(serverUrl);
             Connection connection = factory.CreateConnection(userName, password);
             Session session = connection.CreateSession(false, Session.AUTO_ACKNOWLEDGE);
-
-            // Used .Queue here... but used Destination in SendByteMessage, is there a difference?
-            // Testing the theory
-            //TIBCO.EMS.Queue queue = session.CreateQueue(queueName);
             Destination queue = session.CreateQueue(queueName);
-            MessageProducer msgProducer = session.CreateProducer(queue);
 
             // Start the Connection
             // Don't I need a connection.Close some where?
@@ -52,13 +47,13 @@ class Program
         }
         catch (EMSException e)
         {
-            Console.Error.WriteLine("Exception in ReceiveByteMessage: " + e.Message);
+            Console.Error.WriteLine("Exception in 2_ReceiveByteMessage: " + e.Message);
             Console.Error.WriteLine(e.StackTrace);
             Environment.Exit(0);
         }
         catch (ThreadInterruptedException e)
         {
-            Console.Error.WriteLine("Exception in ReceiveByteMessage: " + e.Message);
+            Console.Error.WriteLine("Exception in 2_ReceiveByteMessage: " + e.Message);
             Console.Error.WriteLine(e.StackTrace);
             Environment.Exit(0);
         }
@@ -97,6 +92,7 @@ class Program
 
         // Acknowledge we received the message.  If the message did not get written to disk
         // we want to not acknowledge the message was received.
+        // need to read up more about this...
         if (ackMode == Session.CLIENT_ACKNOWLEDGE ||
             ackMode == Session.EXPLICIT_CLIENT_ACKNOWLEDGE ||
             ackMode == Session.EXPLICIT_CLIENT_DUPS_OK_ACKNOWLEDGE)
