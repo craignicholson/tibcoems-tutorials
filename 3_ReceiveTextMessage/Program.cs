@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.IO;
 using System.Threading;
 using TIBCO.EMS;
 
@@ -20,7 +18,7 @@ class Program
 
     public static void Main(string[] args)
     {
-        Console.WriteLine("2_ReceiveTextMessage Point-to-Point Consumer started");
+        Console.WriteLine("ReceiveTextMessage Consumer started");
         new Program().Run(args);
         //Console.WriteLine(" Press [enter] to exit.");
         Console.ReadLine();
@@ -51,13 +49,13 @@ class Program
         }
         catch (EMSException e)
         {
-            Console.Error.WriteLine("Exception in ReceiveByteMessage: " + e.Message);
+            Console.Error.WriteLine("Exception in ReceiveTextMessage: " + e.Message);
             Console.Error.WriteLine(e.StackTrace);
             Environment.Exit(0);
         }
         catch (ThreadInterruptedException e)
         {
-            Console.Error.WriteLine("Exception in ReceiveByteMessage: " + e.Message);
+            Console.Error.WriteLine("Exception in ReceiveTextMessage: " + e.Message);
             Console.Error.WriteLine(e.StackTrace);
             Environment.Exit(0);
         }
