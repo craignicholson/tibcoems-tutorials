@@ -182,10 +182,10 @@ IS this doable with TIBCO?
 #### Tutorial 10 SSL Example
 
 ## Message Models
+[Short review of Tibco EMS documentation](https://docs.tibco.com/pub/enterprise_message_service/8.1.0/doc/html/tib_ems_users_guide/wwhelp/wwhimpl/js/html/wwhelp.htm#href=EMS.5.084.htm#4999850)
 
 ### Point-to-Point
-One producure and one consumer per message or multiple producures and consumers on one queue.
-Are all queues of this type at SSN?
+One producer and one consumer per message or multiple producures and consumers on one queue.
 
 #### Publish and Subscribe
 Producers address messages to a topic.
