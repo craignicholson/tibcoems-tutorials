@@ -82,8 +82,8 @@ to create a durable subscriber.
 
 - [1_ReceiveDurable](https://github.com/craignicholson/tibcoems-tutorials/tree/master/1_ReceiveDurable)
 
-Once the 1_ReceiveDurable has ran once and created a durable to the topic if this client closes and messages
-are delivered to the topic, once the client is restarted it will receive the messages.
+Once 1_ReceiveDurable has ran once and created a durable subriber to the topic if this client stops and messages
+are delivered to the topic, once the client is restarted the client will receive the messages.
 
 > tcp://localhost:7222> show topic GeneralTopic
 
