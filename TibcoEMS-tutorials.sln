@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4_Worker", "4_Worker\4_Work
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4_Tasks", "4_Tasks\4_Tasks.csproj", "{40D39526-D011-4034-8B5F-96AA8F2EF3B1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1_ReceiveDurable", "1_ReceiveDurable\1_ReceiveDurable.csproj", "{B2907EF5-792C-4368-8783-A16DCA6C61A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{40D39526-D011-4034-8B5F-96AA8F2EF3B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40D39526-D011-4034-8B5F-96AA8F2EF3B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40D39526-D011-4034-8B5F-96AA8F2EF3B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2907EF5-792C-4368-8783-A16DCA6C61A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2907EF5-792C-4368-8783-A16DCA6C61A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2907EF5-792C-4368-8783-A16DCA6C61A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2907EF5-792C-4368-8783-A16DCA6C61A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
