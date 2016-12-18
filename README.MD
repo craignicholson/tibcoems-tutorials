@@ -82,6 +82,11 @@ to create a durable subscriber.
 
 - [1_ReceiveDurable](https://github.com/craignicholson/tibcoems-tutorials/tree/master/1_ReceiveDurable)
 
+By default, subscribers only receive messages when they are active. If messages arrive on the topic when the subscriber is not available, the subscriber does not receive those messages.
+The EMS APIs allow you to create durable subscribers to ensure that messages are received, even if the message consumer is not currently running. Messages for durable subscriptions are stored on the server as long as durable subscribers exist for the topic, or until the message expiration time for the message has been reached, or until the storage limit has been reached for the topic. Durable subscribers can receive messages from a durable subscription even if the subscriber was not available when the message was originally delivered.
+When an application restarts and recreates a durable subscriber with the same ID, all messages stored on the server for that topic are delivered to the durable subscriber.
+See Creating a Message Consumer for details on how to create durable subscribers.
+
 Once 1_ReceiveDurable has ran once and created a durable subriber to the topic if this client stops and messages
 are delivered to the topic, once the client is restarted the client will receive the messages.
 
@@ -174,14 +179,7 @@ IS this doable with TIBCO?
 
 #### Tutorial 9: MultiCast Example
 
-#### Tutorial 10: Durable Subscriber
-Durable Subscribers for Topics
-By default, subscribers only receive messages when they are active. If messages arrive on the topic when the subscriber is not available, the subscriber does not receive those messages.
-The EMS APIs allow you to create durable subscribers to ensure that messages are received, even if the message consumer is not currently running. Messages for durable subscriptions are stored on the server as long as durable subscribers exist for the topic, or until the message expiration time for the message has been reached, or until the storage limit has been reached for the topic. Durable subscribers can receive messages from a durable subscription even if the subscriber was not available when the message was originally delivered.
-When an application restarts and recreates a durable subscriber with the same ID, all messages stored on the server for that topic are delivered to the durable subscriber.
-See Creating a Message Consumer for details on how to create durable subscribers.
-
-#### Tutorial 11 SSL Example
+#### Tutorial 10 SSL Example
 
 ## Message Models
 
