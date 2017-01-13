@@ -1,5 +1,5 @@
 # DotNet C# code for Tibco EMS Tutorials 
-Here you can find C# examples for Tibco EMS.
+Here you can find C# examples for Tibco EMS.  Examples where created in VS2015 on Windows 10.
 
 To successfully use the examples you will need a running Tibco EMS server.
 
@@ -180,6 +180,144 @@ IS this doable with TIBCO?
 #### Tutorial 9: MultiCast Example
 
 #### Tutorial 10 SSL Example
+Starting EMS with SSL
+1. EMS .NET 2.0 clients use the Microsoft implementation of SSL. The Microsoft implementation of SSL is compatible with OpenSSL. Certificates required by the client can either be stored in files or the Microsoft certificate store. However, Microsoft requires that the root certificate be installed in the Microsoft Certificate Store, even when certificate files are in use.
+
+https://docs.tibco.com/pub/enterprise_message_service/8.1.0/doc/html/tib_ems_users_guide/wwhelp/wwhimpl/js/html/wwhelp.htm#href=EMS.5.084.htm#4999850
+
+Location of 
+C:\tibco\ems\8.3\bin
+tibemsd.conf
+
+Edit tibemsd.conf
+https://docs.tibco.com/pub/enterprise_message_service/8.1.0/doc/html/tib_ems_users_guide/wwhelp/wwhimpl/js/html/wwhelp.htm#href=EMS.5.084.htm#4999850
+
+Set the server to listen for SSL connections from clients by using the listen parameter in tibemsd.conf. To specify that a port accept SSL connections, specify the SSL protocol in the listen parameter as follows:
+
+```
+
+TIBCO Enterprise Message Service.
+Copyright 2003-2016 by TIBCO Software Inc.
+All rights reserved.
+
+Version 8.3.0 V14 3/9/2016
+
+2017-01-10 14:25:25.542 Process started from 'C:\tibco\ems\8.3\bin\tibemsd.exe'.
+2017-01-10 14:25:25.542 Process Id: 16548
+2017-01-10 14:25:25.542 Hostname: DESKTOP-J8LDBJI
+2017-01-10 14:25:25.542 Hostname IP address: [fe80::f085:c3aa:4f63:f896%5]
+2017-01-10 14:25:25.542 Hostname IP address: 192.168.1.48
+2017-01-10 14:25:25.542 Reading configuration from 'C:\ProgramData\TIBCO_HOME\tibco\cfgmgmt/ems/data/tibemsd.conf'.
+2017-01-10 14:25:25.627 Logging into file 'C:/ProgramData/TIBCO_HOME/tibco/cfgmgmt/ems/data/datastore/logfile'
+2017-01-10 14:25:25.627 Server name: 'EMS-SERVER'.
+2017-01-10 14:25:25.627 Storage Location: 'C:/ProgramData/TIBCO_HOME/tibco/cfgmgmt/ems/data/datastore'.
+2017-01-10 14:25:25.627 Routing is disabled.
+2017-01-10 14:25:25.627 Authorization is disabled.
+2017-01-10 14:25:25.627 Accepting connections on tcp://DESKTOP-J8LDBJI/[::]:7222.
+2017-01-10 14:25:25.642 Accepting connections on tcp://DESKTOP-J8LDBJI/0.0.0.0:7222.
+2017-01-10 14:25:25.642 Recovering state, please wait.
+2017-01-10 14:25:25.658 Recovered 3 messages.
+2017-01-10 14:25:25.658 Server is active.
+
+```
+C:\ProgramData\TIBCO_HOME\tibco\cfgmgmt/ems/data/tibemsd.conf
+
+Edit 
+```txt
+
+ ########################################################################
+# Listen ports. May be tcp or ssl, can specify any number.
+# Form is tcp://hostname:port. If the hostname is not present then 
+# the default host and interface will be used.
+########################################################################
+
+#listen                  = tcp://7222
+listen					= ssl://localhost:7243
+
+```
+
+########################################################################
+# SSL Server Setup Information.
+#
+# These parameters define server-side certificate, private key, issuers
+# of client certificates and miscellaneous parameters used by this EMS
+# server when handling SSL connections from the clients and other EMS
+# servers.
+########################################################################
+
+# specify Diffie-Hellman key size, valid values are 512, 768, 1024, 2048.
+# Default is 1024. Not used for export grade cipher suites.
+
+ssl_dh_size             =
+
+# can be used to disable specific ciphers or change the 
+# priority order. This is used in the format accepted
+# by OpenSSL, refer to OpenSSL documentation for more info.
+# Example: ssl_ciphers = +DES-CBC3-SHA:+RC4-SHA
+
+ssl_server_ciphers      =
+
+# The following is set if all clients must preset the certificate.
+# If disabled the client may or may not have the certificate.
+
+ssl_require_client_cert =
+
+# This enforces the policy when the connection username is always
+# extracted from the certificate, if the certificate was presented
+# by the client. This does not affect users who have no certificate.
+
+ssl_use_cert_username   =
+
+# This specifies a special username, when presented as connection user
+# name, the actual username is extracted from the client certificate
+# if client has the certificate. This does not affect users who have
+# no certificate.
+
+ssl_cert_user_specname  = CERTIFICATE_USER
+
+# Server certificate, key and private key password. If password not
+# specified it is prompted for at start up time. The key and server
+# certificate issuers may be included into specified PKCS12 file.
+# Supports PEM, DER and PKCS12.
+
+ssl_server_identity     = "C:/tibco/ems/8.3/certs/server.cert.pem"
+ssl_server_key          = "C:/tibco/ems/8.3/certs/server.key.pem"
+ssl_password            = $man$WjtSRCpaXu7hoTkDlcEPr6KNKRr
+
+# Server Issuer certificate(s).
+# Supports PEM, DER and PKCS#12.
+# This may be a part of PKCS12 specified by ssl_server_identity
+
+ssl_server_issuer       = 
+
+# Trusted issuers of client certificates. Supports PEM, DER and PKCS7.
+
+ssl_server_trusted      = "C:/tibco/ems/8.3/certs/client_root.cert.pem"
+
+# Path to installed Enthropy Gathering Daemon
+
+ssl_rand_egd            = 
+
+Windows 10 - MakeCert
+https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk
+
+C:\Program Files (x86)\Windows Kits\10\
+
+Create the Certificate
+
+MMC to convert ot base64
+ * Open the Microsoft management console and import the SampleAuthority certificate into a Certificate Store.
+ * I used Trusted Root Certification Authorities
+ * Double Click into Trusted Root Certification Authorities
+ * Open with dbl click the SampleAuthority
+ * Click Details Tab
+ * Click Copy to File
+ * Click Next
+ * Select Base-64 encoded X.509 (.cer). Save to your project as SampleAuthorityBase64.cer.
+ * Open this file and copy everything betweeen
+  -----BEGIN CERTIFICATE----- and -----END CERTIFICATE----- into the EMS server's
+  client_root.cert.pem file. 
+* what next...
 
 ## Message Models
 [Short review of Tibco EMS documentation](https://docs.tibco.com/pub/enterprise_message_service/8.1.0/doc/html/tib_ems_users_guide/wwhelp/wwhimpl/js/html/wwhelp.htm#href=EMS.5.084.htm#4999850)
