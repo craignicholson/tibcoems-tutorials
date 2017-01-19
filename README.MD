@@ -221,8 +221,7 @@ Version 8.3.0 V14 3/9/2016
 
 ```
 C:\ProgramData\TIBCO_HOME\tibco\cfgmgmt/ems/data/tibemsd.conf
-
-Edit 
+ 
 ```txt
 
  ########################################################################
@@ -231,10 +230,8 @@ Edit
 # the default host and interface will be used.
 ########################################################################
 
-#listen                  = tcp://7222
+#listen                 = tcp://7222
 listen					= ssl://localhost:7243
-
-```
 
 ########################################################################
 # SSL Server Setup Information.
@@ -297,6 +294,8 @@ ssl_server_trusted      = "C:/tibco/ems/8.3/certs/client_root.cert.pem"
 # Path to installed Enthropy Gathering Daemon
 
 ssl_rand_egd            = 
+```
+
 
 Windows 10 - MakeCert
 https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk
